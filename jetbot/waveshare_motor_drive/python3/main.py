@@ -90,8 +90,8 @@ class MotorDriver():
 try:
     Motor = MotorDriver()
     # control 2 motor
-    Motor.MotorRun(0, 'slowright', 30) 
-    Motor.MotorRun(1, 'slowright', 30)
+    Motor.MotorRun(0, 'slowright', 50) 
+    Motor.MotorRun(1, 'slowright', 50)
     #print("sssssssss1")
     while(1):
         time.sleep(1);
