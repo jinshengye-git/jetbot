@@ -90,7 +90,7 @@ class MotorDriver():
 try:
     Motor = MotorDriver()
     # control 2 motor
-    Motor.MotorRun(0, 'slowright', 50) 
+    Motor.MotorRun(0, 'slowright', 100) 
     Motor.MotorRun(1, 'slowright', 50)
     #print("sssssssss1")
     while(1):
@@ -101,7 +101,7 @@ except IOError as e:
     
 except KeyboardInterrupt:    
     print("\r\nctrl + c:")
-    #Motor.MotorRun(0, 'forward', 0)
-    #Motor.MotorRun(1, 'backward', 0)
+    Motor.MotorRun(0, 'forward', 0)
+    Motor.MotorRun(1, 'backward', 0)
     exit()
 
