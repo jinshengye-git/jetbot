@@ -41,9 +41,15 @@ class MotorDriver():
                 pwm.setLevel(self.AIN1, 1)
                 pwm.setLevel(self.AIN2, 0)
             elif (index == Dir[4]):
-
+                speed = speed * 0.8
+                pwm.setDutycycle(self.PWMA, speed)
+                pwm.setLevel(self.AIN1, 0)
+                pwm.setLevel(self.AIN2, 1)
             else:
-                pass
+                speed = speed * 0.8
+                pwm.setDutycycle(self.PWMA, speed)
+                pwm.setLevel(self.AIN1, 1)
+                pwm.setLevel(self.AIN2, 0)
                 
         else: #Right Motor
             pwm.setDutycycle(self.PWMB, speed)
@@ -60,8 +66,19 @@ class MotorDriver():
                 pwm.setLevel(self.BIN1, 1)
                 pwm.setLevel(self.BIN2, 0)
             elif (index == Dir[4]):
+                speed = speed * 0.8
+                pwm.setDutycycle(self.PWMB, speed)
+                pwm.setLevel(self.BIN1, 0)
+                pwm.setLevel(self.BIN2, 1)
             else:
-                pass
+                speed = speed * 0.8
+                pwm.setDutycycle(self.PWMB, speed)
+                pwm.setLevel(self.BIN1, 1)
+                pwm.setLevel(self.BIN2, 0)
+
+
+
+
 
     def MotorStop(self, motor):
         if (motor == 0):
@@ -73,8 +90,8 @@ class MotorDriver():
 try:
     Motor = MotorDriver()
     # control 2 motor
-    Motor.MotorRun(0, 'spinright', 100) 
-    Motor.MotorRun(1, 'spinright', 100)
+    Motor.MotorRun(0, 'slowright', 30) 
+    Motor.MotorRun(1, 'slowright', 30)
     #print("sssssssss1")
     while(1):
         time.sleep(1);
@@ -84,7 +101,7 @@ except IOError as e:
     
 except KeyboardInterrupt:    
     print("\r\nctrl + c:")
-    Motor.MotorRun(0, 'forward', 0)
-    Motor.MotorRun(1, 'backward', 0)
+    #Motor.MotorRun(0, 'forward', 0)
+    #Motor.MotorRun(1, 'backward', 0)
     exit()
 
