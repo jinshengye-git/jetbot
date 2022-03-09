@@ -1,5 +1,6 @@
 *.asc
 .ipynb_checkpoints
 __pycache__
+.vscode
 # MkDocs documentation
 site/
