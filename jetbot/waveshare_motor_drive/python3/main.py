@@ -107,20 +107,6 @@ class MotorDriver():
         elif motor == self.MOTOR_R.value:
             pwm.setDutycycle(self.PWMB, pulse=0)
 
-    def MotorSmootherStop(self, motor):
-        if motor == self.MOTOR_L.value:
-            pwm.setDutycycle(self.PWMA, pulse=70)
-            pwm.setDutycycle(self.PWMA, pulse=40)
-            pwm.setDutycycle(self.PWMA, pulse=10)
-            pwm.setDutycycle(self.PWMA, pulse=0)
-        elif motor == self.MOTOR_R.value:
-            pwm.setDutycycle(self.PWMB, pulse=70)
-            pwm.setDutycycle(self.PWMB, pulse=40)
-            pwm.setDutycycle(self.PWMB, pulse=10)
-            pwm.setDutycycle(self.PWMB, pulse=0)
-
-
-
 try:
     Motor = MotorDriver()
     # control 2 motor
@@ -135,8 +121,8 @@ except IOError as e:
     
 except KeyboardInterrupt:    
     print("\r\nctrl + c:")
-    Motor.MotorRun(0, 'forward', 0)
-    Motor.MotorRun(1, 'backward', 0)
+    Motor.MotorStop(1)
+    Motor.MotorStop(0)
     exit()
 
 
