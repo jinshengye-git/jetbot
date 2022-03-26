@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
-import time
-import math
-import smbus
+from time import sleep
+from math import floor
+from smbus import SMBus
 
 # ============================================================================
 # Raspi PCA9685 16-Channel PWM Servo Driver
@@ -26,7 +26,7 @@ class PCA9685:
   __ALLLED_OFF_H       = 0xFD
 
   def __init__(self, address, debug=True):
-    self.bus = smbus.SMBus(1)
+    self.bus = SMBus(1)
     self.address = address
     self.debug = debug
     if (self.debug):
@@ -55,16 +55,16 @@ class PCA9685:
     if (self.debug):
       print("Setting PWM frequency to %d Hz" % freq)
       print("Estimated pre-scale: %d" % prescaleval)
-    prescale = math.floor(prescaleval + 0.5)
+    prescale = floor(prescaleval + 0.5)
     if (self.debug):
       print("Final pre-scale: %d" % prescale)
 
     oldmode = self.read(self.__MODE1);
     newmode = (oldmode & 0x7F) | 0x10        # sleep
     self.write(self.__MODE1, newmode)        # go to sleep
-    self.write(self.__PRESCALE, int(math.floor(prescale)))
+    self.write(self.__PRESCALE, int(floor(prescale)))
     self.write(self.__MODE1, oldmode)
-    time.sleep(0.005)
+    sleep(0.005)
     self.write(self.__MODE1, oldmode | 0x80)
     self.read(self.__MODE1);
 
