@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 from PCA9685 import PCA9685
 from time import time, sleep
 from enum import Enum
