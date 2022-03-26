@@ -1,6 +1,6 @@
 from PCA9685 import PCA9685
 from enum import Enum
-
+from time import time, sleep
 class DIR(Enum):
     FORWARD =  'forward'    
     BACKWARD=  'backward'
@@ -113,9 +113,9 @@ class MotorDriver():
 #try:
 #    Motor = MotorDriver()
     # control 2 motor
-    # Motor.MotorRun(Motor.MOTOR_L.value, Motor.DIR_SLOWRIGHT.value, 100) 
-    # Motor.MotorRun(Motor.MOTOR_R.value, Motor.DIR_SLOWRIGHT.value, 50)
-#    Motor.motor_slowright(100)
+#    Motor.motor_run(Motor.MOTOR_L.value, Motor.DIR_SLOWRIGHT.value, 100) 
+#    Motor.motor_run(Motor.MOTOR_R.value, Motor.DIR_SLOWRIGHT.value, 50)
+    #Motor.motor_slowright(100)
 #    now = time()
 #    while time() - now < 6:
 #        sleep(1);

@@ -1,4 +1,4 @@
-from .motor_driver import MotorDriver
+from motor_driver import MotorDriver
 
 class Robot():
     def __init__(self):
@@ -21,6 +21,6 @@ class Robot():
         self.__motor.motor_run(self.__motor.MOTOR_R.value,self.__motor.DIR_SLOWLEFT.value,speed/2)
 
     def right(self,speed):
-        self.__motor.motor_run(self.__motor.MOTOR_L.value,self.__motor.DIR_SLOWRIGHT.value,speed)
-        self.__motor.motor_run(self.__motor.MOTOR_R.value,self.__motor.DIR_SLOWRIGHT.value,speed/2)
+        self.__motor.motor_run(self.__motor.MOTOR_R.value,self.__motor.DIR_SLOWRIGHT.value,speed)
+        self.__motor.motor_run(self.__motor.MOTOR_L.value,self.__motor.DIR_SLOWRIGHT.value,speed/2)
 
