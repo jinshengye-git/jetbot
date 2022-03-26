@@ -4,7 +4,6 @@ from PCA9685 import PCA9685
 from time import time, sleep
 from enum import Enum
 
-BRAKE_SMOOTHER = [0.]
 class DIR(Enum):
     FORWARD =  'forward'    
     BACKWARD=  'backward'
@@ -12,14 +11,15 @@ class DIR(Enum):
     SPINRIGHT= 'spinright'
     SLOWLEFT=  'slowleft'
     SLOWRIGHT= 'slowright'
+
 class MOTOR(Enum):
     LEFT=  0
     RIGHT= 1
     MAX_VAL=100
 
-
 pwm = PCA9685(0x40, debug=False)
 pwm.setPWMFreq(50)
+
 class MotorDriver():
     def __init__(self):
         self.PWMA = 0
@@ -107,25 +107,30 @@ class MotorDriver():
             pwm.setDutycycle(self.PWMA, pulse=0) #pulse 0 ~ 100
         elif motor == self.MOTOR_R.value:
             pwm.setDutycycle(self.PWMB, pulse=0)
-    def motor_slowright(self,speed):
-        self.motor_run(self.MOTOR_L.value,self.DIR_SLOWRIGHT.value,speed)
-        self.motor_run(self.MOTOR_R.value,self.DIR_SLOWRIGHT.value,speed/2)
-try:
-    Motor = MotorDriver()
+
+
+
+#    def motor_slowright(self,speed):
+#        self.motor_run(self.MOTOR_L.value,self.DIR_SLOWRIGHT.value,speed)
+#        self.motor_run(self.MOTOR_R.value,self.DIR_SLOWRIGHT.value,speed/2)
+#try:
+#    Motor = MotorDriver()
     # control 2 motor
     # Motor.MotorRun(Motor.MOTOR_L.value, Motor.DIR_SLOWRIGHT.value, 100) 
     # Motor.MotorRun(Motor.MOTOR_R.value, Motor.DIR_SLOWRIGHT.value, 50)
-    Motor.motor_slowright(100)
-    while(1):
-        sleep(1);
-
-except IOError as e:
-    print(e)
+#    Motor.motor_slowright(100)
+#    now = time()
+#    while time() - now < 6:
+#        sleep(1);
+#    Motor.motor_stop(1)
+#    Motor.motor_stop(0)
+#except IOError as e:
+#    print(e)
     
-except KeyboardInterrupt:    
-    print("\r\nctrl + c:")
-    Motor.motor_stop(Motor.MOTOR_L.value)
-    Motor.motor_stop(Motor.MOTOR_R.value)
-    exit()
+#except KeyboardInterrupt:    
+#    print("\r\nctrl + c:")
+#    Motor.motor_stop(Motor.MOTOR_L.value)
+#    Motor.motor_stop(Motor.MOTOR_R.value)
+#    exit()
 
 
