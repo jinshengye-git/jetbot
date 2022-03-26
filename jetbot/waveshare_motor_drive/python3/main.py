@@ -37,10 +37,11 @@ class MotorDriver():
         self.DIR_SPINRIGHT=DIR.SPINRIGHT
         self.DIR_SLOWLEFT=DIR.SLOWLEFT
         self.DIR_SLOWRIGHT=DIR.SLOWRIGHT
-    def MotorRun(self, motor, index, speed):
+    
+    def motor_run(self, motor, index, speed):
         #  DC Motor :
         #  
-        if speed > 100:
+        if speed > self.MOTOR_MAX_VAL.value:
             print('Speed should be 1 ~ 100')
             return
         if motor == self.MOTOR_L.value: #Left Motor
@@ -101,18 +102,20 @@ class MotorDriver():
             print('Wrong motor value')
             return
 
-    def MotorStop(self, motor):
+    def motor_stop(self, motor):
         if motor == self.MOTOR_L.value:
             pwm.setDutycycle(self.PWMA, pulse=0) #pulse 0 ~ 100
         elif motor == self.MOTOR_R.value:
             pwm.setDutycycle(self.PWMB, pulse=0)
-
+    def motor_slowright(self,speed):
+        self.motor_run(self.MOTOR_L.value,self.DIR_SLOWRIGHT.value,speed)
+        self.motor_run(self.MOTOR_R.value,self.DIR_SLOWRIGHT.value,speed/2)
 try:
     Motor = MotorDriver()
     # control 2 motor
-    Motor.MotorRun(0, 'slowright', 100) 
-    Motor.MotorRun(1, 'slowright', 50)
-
+    # Motor.MotorRun(Motor.MOTOR_L.value, Motor.DIR_SLOWRIGHT.value, 100) 
+    # Motor.MotorRun(Motor.MOTOR_R.value, Motor.DIR_SLOWRIGHT.value, 50)
+    Motor.motor_slowright(100)
     while(1):
         sleep(1);
 
@@ -121,8 +124,8 @@ except IOError as e:
     
 except KeyboardInterrupt:    
     print("\r\nctrl + c:")
-    Motor.MotorStop(1)
-    Motor.MotorStop(0)
+    Motor.motor_stop(Motor.MOTOR_L.value)
+    Motor.motor_stop(Motor.MOTOR_R.value)
     exit()
 
 
