@@ -5,7 +5,12 @@ import ipywidgets.widgets as widgets
 import time
 import threading
 
+RUNNING = False
 
+def signal_handler(sig, frame):
+    global RUNNING
+    print('You pressed Ctrl+C!')
+    RUNNING = False
 class Heartbeat(Configurable):
     class Status(enum.Enum):
         dead = 0
@@ -28,7 +33,8 @@ class Heartbeat(Configurable):
         self.start()
 
     def _run(self):
-        while True:
+        while RUNNING:
+            print('hi')
             if not self.running:
                 break
             if self.pulseout.value - self.pulsein.value >= self.period:
@@ -39,9 +45,11 @@ class Heartbeat(Configurable):
             time.sleep(self.period)
 
     def start(self):
+        global RUNNING
+        RUNNING = True
         if self.running:
             return
-        self.running = True
+        self.running = RUNNING
         self.thread = threading.Thread(target=self._run)
         self.thread.start()
 
