@@ -1,4 +1,4 @@
-#from robot import Robot
+from robot import Robot
 from time import time, sleep
 from heartbeat import Heartbeat, signal_handler
 from signal import SIGINT,signal
